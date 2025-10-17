@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Alonso – Email Optimizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>David Alonso – Estimation Hub Inc.</h1>
+  <p>Professional Email Optimizer & Cleaner</p>
+</header>
+
+<main>
+  <h2>Paste your email below:</h2>
+  <textarea id="emailInput" placeholder="Paste your email here..."></textarea>
+  
+  <div class="buttons">
+    <button onclick="cleanEmail()">Clean & Format</button>
+    <button onclick="checkSpam()">Check Spam Words</button>
+    <button onclick="suggestContent()">Suggest Content</button>
+    <button onclick="copyPreview()">Copy Optimized Email</button>
+    <button onclick="downloadHTML()">Download as HTML</button>
+  </div>
+
+  <h3>Live Preview:</h3>
+  <div id="preview" class="preview"></div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
