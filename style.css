@@ -57,3 +57,10 @@ button {
   color: red;
   font-weight: bold;
 }
+
+.ai-suggestion {
+  color: #0066cc;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
