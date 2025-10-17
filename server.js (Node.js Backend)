@@ -1,0 +1,46 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const { OpenAI } = require('openai');
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.post('/api/suggest', async (req, res) => {
+  try {
+    const { emailText, clientName, projectName } = req.body;
+
+    const prompt = `
+You are a professional construction email editor.
+Rewrite this email professionally, clearly, persuasively, and personalized.
+Email: "${emailText}"
+Client: "${clientName || 'Client'}"
+Project: "${projectName || 'Project'}"
+Add a strong call-to-action.
+`;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-5-mini",
+      messages: [
+        { role: "system", content: "You are an expert business email editor." },
+        { role: "user", content: prompt }
+      ],
+      temperature: 0.7
+    });
+
+    const suggestion = response.choices[0].message.content;
+    res.json({ suggestion });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to get AI suggestion' });
+  }
+});
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
